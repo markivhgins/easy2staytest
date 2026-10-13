@@ -38,7 +38,7 @@ document.addEventListener('click', async e => {
 // Hero search: the type dropdown follows the selected tab (PG sharing vs flat size).
 document.addEventListener('change', e => { const f = e.target.form; if (e.target.name !== 'cat' || !f || f.id !== 'hs') return;
   const pg = e.target.value === 'pg', s = f.elements.spec, opts = pg ? ['single', '2-share', '3-share'] : ['1 RK', '1 BHK', '2 BHK', '3 BHK'];
-  s.setAttribute('aria-label', pg ? 'Occupancy type' : 'Home size'); s.replaceChildren(new Option(pg ? 'Occupancy type' : 'Home size', ''), ...opts.map(o => new Option(o))); });
+  s.setAttribute('aria-label', pg ? 'Sharing' : 'Home size'); s.replaceChildren(new Option(pg ? 'Sharing' : 'Home size', ''), ...opts.map(o => new Option(o))); });
 
 // Mobile menu toggle: opens/closes the top-bar tabs; closes on link tap, Escape, outside tap, or when resized to desktop.
 (() => {

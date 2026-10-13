@@ -117,3 +117,23 @@ textarea{background:#fff;border:1px solid var(--line);padding:11px 13px;width:10
 .sbtn{border-radius:999px;background:#E8730C;display:flex;align-items:center;gap:9px;padding:0 32px;height:54px;font-size:17px;flex:none}.sbtn:hover{background:#C95F00}
 @media(max-width:900px){.sbar{flex-direction:column;align-items:stretch;border-radius:26px;padding:10px}.pf,.pf+.pf{flex:none;height:54px;padding:0 14px;border-radius:12px}.pf+.pf{border-left:0;border-top:1px solid var(--line);border-radius:0}.sbtn{justify-content:center;margin-top:8px}.seg{gap:16px}}
 .pf input::-webkit-calendar-picker-indicator{display:none!important}
+
+/* mobile menu */
+.nt{display:none;flex:none;width:44px;height:44px;padding:0;border:1px solid var(--line);background:#fff;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px}
+.nt span{display:block;width:22px;height:2px;background:var(--navy);transition:transform .2s,opacity .2s}
+.nt[aria-expanded=true] span:nth-child(1){transform:translateY(7px) rotate(45deg)}.nt[aria-expanded=true] span:nth-child(2){opacity:0}.nt[aria-expanded=true] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.navso{display:none}
+@media(max-width:900px){
+  header{gap:10px;padding:10px 4vw;flex-wrap:nowrap}
+  header .logo{font-size:24px;margin-right:auto;min-width:0}header .logo img{width:38px;height:38px}
+  .nt{display:flex}
+  header .me{max-width:42vw;overflow:hidden;text-overflow:ellipsis;padding:9px 12px;font-size:13.5px}
+  header .so{display:none}
+  header nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;gap:0;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 16px 30px #071b4b22;max-height:calc(100vh - 70px);overflow-y:auto;padding:6px 4vw 14px}
+  header nav.open{display:flex}
+  header nav a{padding:14px 0;border-bottom:1px solid var(--line);font-size:17px}
+  header nav a:hover,header nav a.on{border-color:var(--line);color:var(--blue)}
+  header nav .navso{display:block;color:var(--red)}
+  .jump{overflow-x:auto;white-space:nowrap}
+}
+@media(max-width:420px){header .logo span{font-size:21px}}

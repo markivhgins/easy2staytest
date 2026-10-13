@@ -39,3 +39,14 @@ document.addEventListener('click', async e => {
 document.addEventListener('change', e => { const f = e.target.form; if (e.target.name !== 'cat' || !f || f.id !== 'hs') return;
   const pg = e.target.value === 'pg', s = f.elements.spec, opts = pg ? ['single', '2-share', '3-share'] : ['1 RK', '1 BHK', '2 BHK', '3 BHK'];
   s.setAttribute('aria-label', pg ? 'Occupancy type' : 'Home size'); s.replaceChildren(new Option(pg ? 'Occupancy type' : 'Home size', ''), ...opts.map(o => new Option(o))); });
+
+// Mobile menu toggle: opens/closes the top-bar tabs; closes on link tap, Escape, outside tap, or when resized to desktop.
+(() => {
+  const btn = document.querySelector('header .nt'), nav = document.getElementById('mainnav'); if (!btn || !nav) return;
+  const set = o => { nav.classList.toggle('open', o); btn.setAttribute('aria-expanded', o); btn.setAttribute('aria-label', o ? 'Close menu' : 'Open menu'); };
+  btn.addEventListener('click', () => set(!nav.classList.contains('open')));
+  nav.addEventListener('click', e => { if (e.target.closest('a')) set(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') set(false); });
+  document.addEventListener('click', e => { if (!e.target.closest('header')) set(false); });
+  matchMedia('(min-width:901px)').addEventListener('change', e => { if (e.matches) set(false); });
+})();

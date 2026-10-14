@@ -4,8 +4,9 @@ const toast = t => { const d = document.createElement('div'); d.className = 'toa
 document.addEventListener('submit', async e => {
   const f = e.target, m = f.querySelector('.msg');
   if (f.id === 'hs') { e.preventDefault(); const d = new FormData(f), cat = d.get('cat'), qs = new URLSearchParams();
-    if (d.get('q')) qs.set('q', d.get('q')); if (d.get('max')) qs.set('max', d.get('max')); if (d.get('spec')) qs.set(cat === 'pg' ? 'occupancy' : 'bhk', d.get('spec'));
-    return location.href = '/' + cat + (qs.toString() ? '?' + qs : ''); }
+    if (cat !== 'pg') return location.href = '/services/' + cat;
+    if (d.get('q')) qs.set('q', d.get('q')); if (d.get('max')) qs.set('max', d.get('max'));
+    return location.href = '/pg' + (qs.toString() ? '?' + qs : ''); }
   if (!f.dataset.post) return; e.preventDefault();
   const d = Object.fromEntries(new FormData(f)); d.consent = !!d.consent; d.details = { ...d };
   try { await post(f.dataset.post, d); m.className = 'msg ok'; m.textContent = f.dataset.ok || 'Request received. Track it on your desk.'; f.reset(); toast('Request received'); }
@@ -34,11 +35,6 @@ document.addEventListener('click', async e => {
   box.addEventListener('focusin', () => clearInterval(timer)); box.addEventListener('focusout', play);
   draw(); play(); addEventListener('load', draw);
 })();
-
-// Hero search: the type dropdown follows the selected tab (PG sharing vs flat size).
-document.addEventListener('change', e => { const f = e.target.form; if (e.target.name !== 'cat' || !f || f.id !== 'hs') return;
-  const pg = e.target.value === 'pg', s = f.elements.spec, opts = pg ? ['single', '2-share', '3-share'] : ['1 RK', '1 BHK', '2 BHK', '3 BHK'];
-  s.setAttribute('aria-label', pg ? 'Sharing' : 'Home size'); s.replaceChildren(new Option(pg ? 'Sharing' : 'Home size', ''), ...opts.map(o => new Option(o))); });
 
 // Mobile menu toggle: opens/closes the top-bar tabs; closes on link tap, Escape, outside tap, or when resized to desktop.
 (() => {
